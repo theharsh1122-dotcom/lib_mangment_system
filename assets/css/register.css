@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background:linear-gradient(125deg, rgb(255, 115, 0),orangered);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 20px;
+}
+
+.register-container {
+    width: 100%;
+    max-width: 900px;
+    background:  rgba(255, 255, 255, 0.13);
+    padding: 40px;
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(30, 41, 59, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.register-container h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #1e1b4b;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.register-container p {
+    text-align: center;
+    color: #64748b;
+    font-size: 15px;
+    margin-bottom: 32px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    border: 1px solid #dbe1ea;
+    background: #f8fafc;
+    color: #1e293b;
+    padding: 14px 16px;
+    border-radius: 11px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background: #ffffff;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.10);
+}
+
+textarea {
+    min-height: 110px;
+    resize: none;
+}
+
+button {
+    grid-column: 1 / -1;
+    margin-top: 5px;
+    padding: 15px;
+    border: none;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #160b2b, #4b176d, #7d2bbd);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+    transition: 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(79, 70, 229, 0.35);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .register-container {
+        padding: 28px 20px;
+        border-radius: 18px;
+    }
+
+    .register-container h1 {
+        font-size: 26px;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    button {
+        grid-column: auto;
+    }
+}
