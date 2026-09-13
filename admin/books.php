@@ -82,7 +82,7 @@ $books = mysqli_query($conn, "SELECT * FROM books ORDER BY id DESC");
             Manage Books
         </a>
 
-        <a href="#">
+        <a href="student.php">
             <span>👨‍🎓</span>
             Manage Students
         </a>

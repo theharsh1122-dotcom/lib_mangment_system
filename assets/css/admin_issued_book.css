@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+    padding: 30px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+h1 {
+    margin-bottom: 25px;
+    color: #222;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.issue-form,
+.issued-list {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+form {
+    display: grid;
+    gap: 15px;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+}
+
+select:focus,
+input:focus {
+    border-color: #5b21b6;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: -8px;
+}
+
+button {
+    padding: 13px;
+    background: #5b21b6;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #451a8a;
+}
+
+.success-message {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.error-message {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.issued-list {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+th,
+td {
+    padding: 13px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+th {
+    background: #5b21b6;
+    color: white;
+}
+
+tr:hover {
+    background: #f8f7fc;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 11px 20px;
+    background: #ddd;
+    color: #222;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background: #ccc;
+}
+
+.return-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #16a34a;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.return-btn:hover {
+    background: #15803d;
+}
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .issue-form,
+    .issued-list {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+}

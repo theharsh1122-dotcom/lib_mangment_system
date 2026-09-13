@@ -37,10 +37,10 @@ $total_librarians = mysqli_fetch_assoc($librarians)['total'];
     <h2>📚 Library</h2>
 
     <a href="dashboard.php" class="active">Dashboard</a>
-   <a href="books.php">📖 Manage Books</a>
-    <a href="#">👨‍🎓 Manage Students</a>
-    <a href="#">👨‍💼 Manage Librarians</a>
-    <a href="#">📋 Issued Books</a>
+    <a href="books.php">📖 Manage Books</a>
+    <a href="student.php">👨‍🎓 Manage Students</a>
+    <a href="librarian.php">👨‍💼 Manage Librarians</a>
+    <a href="issued_book.php">📋 Issued Books</a>
     <a href="#">📊 Reports</a>
 
     <a href="../auth/logout.php" class="logout">Logout</a>
@@ -119,9 +119,9 @@ $total_librarians = mysqli_fetch_assoc($librarians)['total'];
             <h2>Quick Actions</h2>
 
             <a href="books.php">➕ Add New Book</a>
-            <a href="#">👨‍🎓 Add Student</a>
-            <a href="#">👨‍💼 Add Librarian</a>
-            <a href="#">📋 Issue Book</a>
+            <a href="student.php">👨‍🎓 Add Student</a>
+            <a href="librarian.php">👨‍💼 Add Librarian</a>
+            <a href="issued_book.php">📋 Issue Book</a>
 
         </div>
 
