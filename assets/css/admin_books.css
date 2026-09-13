@@ -1,0 +1,459 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f5f6fb;
+    color: #20212c;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: #17152b;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    padding: 0 15px 30px;
+}
+
+.logo span {
+    font-size: 30px;
+}
+
+.logo h2 {
+    font-size: 22px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu a,
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    color: #b9b6c9;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #6c4ce6;
+    color: white;
+}
+
+.menu a span,
+.logout span {
+    width: 22px;
+    text-align: center;
+}
+
+.logout {
+    margin-top: auto;
+    background: #241f3d;
+    color: #ff8d8d;
+}
+
+.logout:hover {
+    background: #d94141;
+    color: white;
+}
+
+.main {
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
+.topbar {
+    height: 90px;
+    background: white;
+    padding: 20px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e9e8ef;
+}
+
+.topbar h1 {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.topbar p {
+    color: #77758a;
+    font-size: 14px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile strong {
+    display: block;
+    font-size: 14px;
+}
+
+.profile small {
+    display: block;
+    color: #888598;
+    margin-top: 3px;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #6c4ce6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.page-content {
+    padding: 35px;
+}
+
+.message {
+    padding: 15px 18px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.message.success {
+    background: #e9f9ef;
+    color: #16833b;
+    border: 1px solid #bce8ca;
+}
+
+.message.error {
+    background: #fff0f0;
+    color: #d33d3d;
+    border: 1px solid #f1c1c1;
+}
+
+.form-card,
+.books-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(29, 27, 45, 0.06);
+    margin-bottom: 30px;
+}
+
+.card-heading,
+.books-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.card-heading h2,
+.books-header h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.card-heading p,
+.books-header p {
+    color: #858296;
+    font-size: 13px;
+}
+
+.book-icon {
+    width: 50px;
+    height: 50px;
+    background: #f0ebff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #dddbe5;
+    border-radius: 9px;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #6c4ce6;
+    box-shadow: 0 0 0 3px rgba(108, 76, 230, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.reset-btn,
+.add-btn {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.reset-btn {
+    background: #f0eff4;
+    color: #555261;
+}
+
+.add-btn {
+    background: #6c4ce6;
+    color: white;
+}
+
+.add-btn:hover {
+    background: #5838ce;
+}
+
+.books-header {
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 240px;
+    padding: 12px 15px;
+    border: 1px solid #dddbe5;
+    border-radius: 9px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-box input:focus {
+    border-color: #6c4ce6;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f7f6fa;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    color: #686578;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+td {
+    padding: 16px 15px;
+    border-bottom: 1px solid #eeeeF3;
+    font-size: 14px;
+}
+
+.book-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.book-avatar {
+    width: 38px;
+    height: 38px;
+    background: #f0ebff;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category {
+    display: inline-block;
+    background: #f0ebff;
+    color: #6344d5;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.quantity {
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+    text-decoration: none;
+    padding: 7px 12px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.edit-btn {
+    background: #eef4ff;
+    color: #3971d9;
+}
+
+.delete-btn {
+    background: #fff0f0;
+    color: #d84444;
+}
+
+.edit-btn:hover {
+    background: #dce9ff;
+}
+
+.delete-btn:hover {
+    background: #ffe0e0;
+}
+
+.no-books {
+    text-align: center;
+    padding: 40px;
+    color: #858296;
+}
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main {
+        margin-left: 210px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .logout {
+        margin-top: 15px;
+    }
+
+    .topbar {
+        height: auto;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .page-content {
+        padding: 20px;
+    }
+
+    .books-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-box,
+    .search-box input {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    .profile {
+        display: none;
+    }
+
+    .form-card,
+    .books-card {
+        padding: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .reset-btn,
+    .add-btn {
+        width: 100%;
+    }
+
+}
