@@ -54,7 +54,7 @@ $students = mysqli_query($conn,
 
 $issued_books = mysqli_query($conn,
     "SELECT issued_books.*,
-           git sr books.book_name,
+            books.book_name,
             students.name,
             students.enrollment_no
      FROM issued_books
@@ -62,6 +62,10 @@ $issued_books = mysqli_query($conn,
      JOIN students ON issued_books.student_id = students.id
      ORDER BY issued_books.id DESC"
 );
+
+if (!$issued_books) {
+    die("Query Error: " . mysqli_error($conn));
+}
 ?>
 
 <!DOCTYPE html>

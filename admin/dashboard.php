@@ -21,6 +21,33 @@ $total_issued = mysqli_fetch_assoc($issued)['total'];
 $librarians = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users WHERE role='librarian'");
 $total_librarians = mysqli_fetch_assoc($librarians)['total'];
 
+$monthly_issued = array_fill(1, 12, 0);
+$monthly_returned = array_fill(1, 12, 0);
+
+$issued_chart = mysqli_query($conn, "
+    SELECT MONTH(issue_date) AS month, COUNT(*) AS total
+    FROM issued_books
+    WHERE YEAR(issue_date) = YEAR(CURDATE())
+    GROUP BY MONTH(issue_date)
+");
+
+while ($row = mysqli_fetch_assoc($issued_chart)) {
+    $monthly_issued[(int)$row['month']] = (int)$row['total'];
+}
+
+$returned_chart = mysqli_query($conn, "
+    SELECT MONTH(return_date) AS month, COUNT(*) AS total
+    FROM issued_books
+    WHERE status='Returned'
+    AND return_date IS NOT NULL
+    AND YEAR(return_date) = YEAR(CURDATE())
+    GROUP BY MONTH(return_date)
+");
+
+while ($row = mysqli_fetch_assoc($returned_chart)) {
+    $monthly_returned[(int)$row['month']] = (int)$row['total'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +68,8 @@ $total_librarians = mysqli_fetch_assoc($librarians)['total'];
     <a href="student.php">👨‍🎓 Manage Students</a>
     <a href="librarian.php">👨‍💼 Manage Librarians</a>
     <a href="issued_book.php">📋 Issued Books</a>
-    <a href="#">📊 Reports</a>
+    <a href="reports.php">📊 Reports</a>
+    <a href="return_book.php">↩️ Return Book</a>
 
     <a href="../auth/logout.php" class="logout">Logout</a>
 
@@ -99,6 +127,133 @@ $total_librarians = mysqli_fetch_assoc($librarians)['total'];
 
     </div>
 
+    <div class="middle-section">
+
+    <div class="statistics-box">
+
+        <div class="statistics-header">
+
+            <div>
+                <h2>📊 Book Issue/Return Statistics</h2>
+            </div>
+
+            <select>
+                <option>This Year</option>
+            </select>
+
+        </div>
+
+        <div class="chart">
+
+            <div class="chart-legend">
+
+                <span>
+                    <i class="issued-color"></i>
+                    Books Issued
+                </span>
+
+                <span>
+                    <i class="returned-color"></i>
+                    Books Returned
+                </span>
+
+            </div>
+
+            <div class="bars">
+
+                <?php
+
+                $months = [
+                    1 => 'Jan',
+                    2 => 'Feb',
+                    3 => 'Mar',
+                    4 => 'Apr',
+                    5 => 'May',
+                    6 => 'Jun',
+                    7 => 'Jul',
+                    8 => 'Aug',
+                    9 => 'Sep',
+                    10 => 'Oct',
+                    11 => 'Nov',
+                    12 => 'Dec'
+                ];
+
+                for ($i = 1; $i <= 12; $i++) {
+
+                    $issued_height = $monthly_issued[$i] > 0
+                        ? min($monthly_issued[$i] * 8, 150)
+                        : 3;
+
+                    $returned_height = $monthly_returned[$i] > 0
+                        ? min($monthly_returned[$i] * 8, 150)
+                        : 3;
+
+                ?>
+
+                    <div class="month">
+
+                        <div class="bar-area">
+
+                            <div
+                                class="bar issued"
+                                style="height: <?php echo $issued_height; ?>px;"
+                                title="Issued: <?php echo $monthly_issued[$i]; ?>"
+                            ></div>
+
+                            <div
+                                class="bar returned"
+                                style="height: <?php echo $returned_height; ?>px;"
+                                title="Returned: <?php echo $monthly_returned[$i]; ?>"
+                            ></div>
+
+                        </div>
+
+                        <span>
+                            <?php echo $months[$i]; ?>
+                        </span>
+
+                    </div>
+
+                <?php } ?>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="quick-box">
+
+        <h2>⚡ Quick Actions</h2>
+
+        <div class="quick-actions">
+
+            <a href="books.php" class="quick-btn blue">
+                <span>📚</span>
+                <strong>Add New Book</strong>
+            </a>
+
+            <a href="student.php" class="quick-btn green">
+                <span>👨‍🎓</span>
+                <strong>Add Student</strong>
+            </a>
+
+            <a href="issued_book.php" class="quick-btn orange">
+                <span>📋</span>
+                <strong>Issue Book</strong>
+            </a>
+
+            <a href="return_book.php" class="quick-btn red">
+                <span>↩️</span>
+                <strong>Return Book</strong>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
 
     <div class="content">
 
@@ -109,20 +264,6 @@ $total_librarians = mysqli_fetch_assoc($librarians)['total'];
                 Manage books, students, librarians and library activities
                 from one place.
             </p>
-
-            <button>View Reports</button>
-        </div>
-
-
-        <div class="quick-box">
-
-            <h2>Quick Actions</h2>
-
-            <a href="books.php">➕ Add New Book</a>
-            <a href="student.php">👨‍🎓 Add Student</a>
-            <a href="librarian.php">👨‍💼 Add Librarian</a>
-            <a href="issued_book.php">📋 Issue Book</a>
-
         </div>
 
     </div>

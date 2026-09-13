@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
 include "../config/database.php";
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: librarians.php");
+    header("Location: librarian.php");
     exit();
 }
 
@@ -18,7 +18,7 @@ $id = (int)$_GET['id'];
 $result = mysqli_query($conn, "SELECT * FROM users WHERE id=$id AND role='librarian'");
 
 if (mysqli_num_rows($result) == 0) {
-    header("Location: librarians.php");
+    header("Location: librarian.php");
     exit();
 }
 
@@ -37,7 +37,7 @@ if (isset($_POST['update_librarian'])) {
               WHERE id=$id AND role='librarian'";
 
     if (mysqli_query($conn, $query)) {
-        header("Location: librarians.php?updated=1");
+        header("Location: librarian.php?updated=1");
         exit();
     } else {
         $error = "Librarian update failed!";
@@ -84,7 +84,9 @@ if (isset($_POST['update_librarian'])) {
 
     </form>
 
-    <a href="librarian.php" class="back-btn">← Back to Librarians</a>
+    <a href="librarian.php" class="back-btn">
+        ← Back to Librarians
+    </a>
 
 </div>
 

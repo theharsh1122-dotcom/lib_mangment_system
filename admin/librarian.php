@@ -146,7 +146,7 @@ $result = mysqli_query($conn, "SELECT * FROM users WHERE role='librarian' ORDER 
                         <td>
                             <a href="edit_librarian.php?id=<?php echo $librarian['id']; ?>" class="edit-btn">Edit</a>
 
-                            <a href="delete_librarian.php?id=<?php echo $librarian['id']; ?>"
+                            <a href="librarian.php?id=<?php echo $librarian['id']; ?>"
                                class="delete-btn"
                                onclick="return confirm('Are you sure you want to delete this librarian?');">
                                 Delete
