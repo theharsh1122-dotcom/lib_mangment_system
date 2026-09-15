@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffffff, #764ba2);
+}
+
+.login-container {
+    width: 400px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.login-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-size: 32px;
+}
+
+.login-container h1 {
+    color: white;
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.login-container p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: white;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+.login-container button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    color: #667eea;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-container button:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.error-message {
+    margin-bottom: 25px;
+    color: red;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+@media (max-width: 500px) {
+    .login-container {
+        width: 90%;
+        padding: 30px 25px;
+    }
+
+    .login-container h1 {
+        font-size: 23px;
+    }
+}

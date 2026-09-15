@@ -27,6 +27,9 @@ if (isset($_POST['add_student'])) {
     $category = $_POST['category'];
     $join_date = $_POST['join_date'];
 
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
     if (
         $name == "" ||
         $father_name == "" ||
@@ -39,7 +42,9 @@ if (isset($_POST['add_student'])) {
         $dob == "" ||
         $gender == "" ||
         $category == "" ||
-        $join_date == ""
+        $join_date == "" ||
+        $username == "" ||
+        $password == ""
     ) {
 
         $message = "Please fill all fields.";
@@ -60,31 +65,64 @@ if (isset($_POST['add_student'])) {
         $category = mysqli_real_escape_string($conn, $category);
         $join_date = mysqli_real_escape_string($conn, $join_date);
 
-        $check = mysqli_query(
+        $username = mysqli_real_escape_string($conn, $username);
+        $password = mysqli_real_escape_string($conn, $password);
+
+        $check_student = mysqli_query(
             $conn,
             "SELECT id FROM students WHERE enrollment_no='$enrollment_no'"
         );
 
-        if (mysqli_num_rows($check) > 0) {
+        $check_user = mysqli_query(
+            $conn,
+            "SELECT id FROM users WHERE username='$username' OR email='$email'"
+        );
+
+        if (mysqli_num_rows($check_student) > 0) {
 
             $message = "Enrollment number already exists.";
             $message_type = "error";
 
+        } elseif (mysqli_num_rows($check_user) > 0) {
+
+            $message = "Username or Email already exists.";
+            $message_type = "error";
+
         } else {
 
-            $query = "INSERT INTO students
-            (name, father_name, course, semester, enrollment_no, email, mobile, address, dob, gender, category, join_date)
-            VALUES
-            ('$name', '$father_name', '$course', '$semester', '$enrollment_no', '$email', '$mobile', '$address', '$dob', '$gender', '$category', '$join_date')";
+            $user_query = "INSERT INTO users
+                (name, email, username, password, role)
+                VALUES
+                ('$name', '$email', '$username', '$password', 'student')";
 
-            if (mysqli_query($conn, $query)) {
+            if (mysqli_query($conn, $user_query)) {
 
-                $message = "Student added successfully.";
-                $message_type = "success";
+                $user_id = mysqli_insert_id($conn);
+
+                $student_query = "INSERT INTO students
+                    (user_id, name, father_name, course, semester, enrollment_no, email, mobile, address, dob, gender, category, join_date)
+                    VALUES
+                    ('$user_id', '$name', '$father_name', '$course', '$semester', '$enrollment_no', '$email', '$mobile', '$address', '$dob', '$gender', '$category', '$join_date')";
+
+                if (mysqli_query($conn, $student_query)) {
+
+                    $message = "Student added successfully.";
+                    $message_type = "success";
+
+                } else {
+
+                    mysqli_query(
+                        $conn,
+                        "DELETE FROM users WHERE id='$user_id'"
+                    );
+
+                    $message = "Student creation failed.";
+                    $message_type = "error";
+                }
 
             } else {
 
-                $message = "Something went wrong. Please try again.";
+                $message = "Account creation failed.";
                 $message_type = "error";
             }
         }
@@ -95,6 +133,7 @@ $students = mysqli_query(
     $conn,
     "SELECT * FROM students ORDER BY id DESC"
 );
+
 $success = "";
 
 if (isset($_GET['updated']) && $_GET['updated'] == 1) {
@@ -125,9 +164,11 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 <body>
 
 <?php if ($success != "") { ?>
+
     <div class="success-message">
         <?php echo $success; ?>
     </div>
+
 <?php } ?>
 
 <div class="sidebar">
@@ -140,7 +181,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
     </div>
 
-
     <div class="menu">
 
         <a href="dashboard.php">
@@ -151,7 +191,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
         </a>
 
-
         <a href="books.php">
 
             <span>📖</span>
@@ -159,7 +198,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
             Manage Books
 
         </a>
-
 
         <a href="student.php" class="active">
 
@@ -169,7 +207,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
         </a>
 
-
         <a href="#">
 
             <span>👨‍💼</span>
@@ -178,7 +215,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
         </a>
 
-
         <a href="#">
 
             <span>📋</span>
@@ -186,7 +222,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
             Issued Books
 
         </a>
-
 
         <a href="#">
 
@@ -198,7 +233,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
     </div>
 
-
     <a href="../auth/logout.php" class="logout">
 
         <span>🚪</span>
@@ -209,9 +243,7 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
 </div>
 
-
 <div class="main">
-
 
     <div class="topbar">
 
@@ -225,7 +257,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
         </div>
 
-
         <div class="profile">
 
             <div class="avatar">
@@ -237,7 +268,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                 ?>
 
             </div>
-
 
             <div>
 
@@ -253,9 +283,7 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
     </div>
 
-
     <div class="page-content">
-
 
         <?php if ($message != "") { ?>
 
@@ -267,9 +295,7 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
         <?php } ?>
 
-
         <div class="form-card">
-
 
             <div class="card-heading">
 
@@ -283,7 +309,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                 </div>
 
-
                 <div class="student-icon">
 
                     👨‍🎓
@@ -292,12 +317,9 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
             </div>
 
-
             <form method="POST">
 
-
                 <div class="form-grid">
-
 
                     <div class="form-group">
 
@@ -312,7 +334,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label>Father Name</label>
@@ -325,7 +346,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                         >
 
                     </div>
-
 
                     <div class="form-group">
 
@@ -340,14 +360,15 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label>Semester</label>
 
                         <select name="semester" required>
 
-                            <option value="">Select Semester</option>
+                            <option value="">
+                                Select Semester
+                            </option>
 
                             <option value="1st Semester">
                                 1st Semester
@@ -385,7 +406,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label>Enrollment No.</label>
@@ -399,7 +419,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label>Email</label>
@@ -412,7 +431,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                         >
 
                     </div>
-
 
                     <div class="form-group">
 
@@ -428,7 +446,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label>Date of Birth</label>
@@ -440,7 +457,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                         >
 
                     </div>
-
 
                     <div class="form-group">
 
@@ -467,7 +483,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                         </select>
 
                     </div>
-
 
                     <div class="form-group">
 
@@ -503,7 +518,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label>Join Date</label>
@@ -517,6 +531,31 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </div>
 
+                    <div class="form-group">
+
+                        <label>Username</label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Create username"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Password</label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Create password"
+                            required
+                        >
+
+                    </div>
 
                     <div class="form-group full-width">
 
@@ -531,9 +570,7 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </div>
 
-
                 </div>
-
 
                 <div class="form-actions">
 
@@ -543,7 +580,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                     >
                         Clear
                     </button>
-
 
                     <button
                         type="submit"
@@ -555,14 +591,11 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                 </div>
 
-
             </form>
 
         </div>
 
-
         <div class="students-card">
-
 
             <div class="students-header">
 
@@ -575,7 +608,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                     </p>
 
                 </div>
-
 
                 <div class="search-box">
 
@@ -590,12 +622,9 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
             </div>
 
-
             <div class="table-wrapper">
 
-
                 <table id="studentsTable">
-
 
                     <thead>
 
@@ -623,9 +652,7 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     </thead>
 
-
                     <tbody>
-
 
                     <?php
 
@@ -637,9 +664,7 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                     ?>
 
-
                         <tr>
-
 
                             <td>
 
@@ -647,11 +672,9 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                             </td>
 
-
                             <td>
 
                                 <div class="student-name">
-
 
                                     <div class="student-avatar">
 
@@ -662,7 +685,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                                         ?>
 
                                     </div>
-
 
                                     <div>
 
@@ -676,7 +698,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                                         </strong>
 
-
                                         <small>
 
                                             <?php
@@ -689,11 +710,9 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                                     </div>
 
-
                                 </div>
 
                             </td>
-
 
                             <td>
 
@@ -709,7 +728,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                             </td>
 
-
                             <td>
 
                                 <?php
@@ -719,7 +737,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                                 ?>
 
                             </td>
-
 
                             <td>
 
@@ -735,7 +752,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                             </td>
 
-
                             <td>
 
                                 <?php
@@ -746,7 +762,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                             </td>
 
-
                             <td>
 
                                 <?php
@@ -756,7 +771,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                                 ?>
 
                             </td>
-
 
                             <td>
 
@@ -772,12 +786,9 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                             </td>
 
-
                             <td>
 
-
                                 <div class="actions">
-
 
                                     <a
                                         href="edit_student.php?id=<?php echo $student['id']; ?>"
@@ -785,7 +796,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                                     >
                                         Edit
                                     </a>
-
 
                                     <a
                                         href="delete_student.php?id=<?php echo $student['id']; ?>"
@@ -795,15 +805,11 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                                         Delete
                                     </a>
 
-
                                 </div>
-
 
                             </td>
 
-
                         </tr>
-
 
                     <?php
 
@@ -812,7 +818,6 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                     } else {
 
                     ?>
-
 
                         <tr>
 
@@ -828,27 +833,19 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 
                         </tr>
 
-
                     <?php } ?>
-
 
                     </tbody>
 
-
                 </table>
-
 
             </div>
 
-
         </div>
-
 
     </div>
 
-
 </div>
-
 
 <script>
 
@@ -861,7 +858,6 @@ function searchStudents() {
     let table = document.getElementById("studentsTable");
 
     let rows = table.getElementsByTagName("tr");
-
 
     for (let i = 1; i < rows.length; i++) {
 
@@ -882,7 +878,6 @@ function searchStudents() {
 }
 
 </script>
-
 
 </body>
 

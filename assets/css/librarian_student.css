@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+    color: #333;
+}
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #24113f;
+    padding: 25px 15px;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 13px 15px;
+    margin-bottom: 8px;
+    color: #ddd;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #6c3bbd;
+    color: white;
+}
+
+.sidebar .logout {
+    margin-top: 30px;
+    background: #d9534f;
+    color: white;
+}
+
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 30px;
+    color: #24113f;
+}
+
+.topbar p {
+    margin-top: 6px;
+    color: #777;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #6c3bbd;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.student-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.box-header h2 {
+    color: #24113f;
+}
+
+#searchInput {
+    width: 280px;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+#searchInput:focus {
+    border-color: #6c3bbd;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+
+th {
+    background: #24113f;
+    color: white;
+    padding: 13px;
+    text-align: left;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background: #f7f3fc;
+}
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+        padding: 20px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .box-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    #searchInput {
+        width: 100%;
+    }
+}

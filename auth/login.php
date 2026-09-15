@@ -4,6 +4,8 @@ session_start();
 
 require_once "../config/database.php";
 
+$error = "";
+
 if (isset($_POST['login'])) {
 
     $username = $_POST['username'];
@@ -14,7 +16,7 @@ if (isset($_POST['login'])) {
 
     if (mysqli_num_rows($result) == 0) {
 
-        echo "Username is incorrect!";
+        $error = "Username is incorrect!";
 
     } else {
 
@@ -22,7 +24,7 @@ if (isset($_POST['login'])) {
 
         if ($user['password'] != $password) {
 
-            echo "Password is incorrect!";
+            $error = "Password is incorrect!";
 
         } else {
 
@@ -39,6 +41,11 @@ if (isset($_POST['login'])) {
                 header("Location: ../librarian/dashboard.php");
                 exit();
             }
+
+            if ($user['role'] == 'student') {
+                header("Location: ../students/dashboard.php");
+                exit();
+            }
         }
     }
 }
@@ -46,27 +53,69 @@ if (isset($_POST['login'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Library Management System - Login</title>
+
+    <link rel="stylesheet" href="../assets/css/login.css">
+
 </head>
+
 <body>
 
-<h1>Library Management System</h1>
+<div class="login-container">
 
-<form method="POST">
+    <div class="login-icon">📚</div>
 
-    <input type="text" name="username" placeholder="Enter Username" required>
+    <h1>Library Management System</h1>
 
-    <br><br>
+    <p>Login to your account</p>
 
-    <input type="password" name="password" placeholder="Enter Password" required>
+    <?php if ($error != "") { ?>
 
-    <br><br>
+        <div class="error-message">
+            <?php echo $error; ?>
+        </div>
 
-    <button type="submit" name="login">Login</button>
+    <?php } ?>
 
-</form>
+    <form method="POST">
+
+        <div class="input-group">
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter Username"
+                required
+            >
+
+        </div>
+
+        <div class="input-group">
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                required
+            >
+
+        </div>
+
+        <button type="submit" name="login">
+            Login
+        </button>
+
+    </form>
+
+</div>
 
 </body>
+
 </html>

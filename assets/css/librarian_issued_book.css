@@ -1,0 +1,218 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+    color: #333;
+}
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #24113f;
+    padding: 25px 15px;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 13px 15px;
+    margin-bottom: 8px;
+    color: #ddd;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #6c3bbd;
+    color: white;
+}
+
+.sidebar .logout {
+    margin-top: 30px;
+    background: #d9534f;
+    color: white;
+}
+
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    color: #24113f;
+    font-size: 30px;
+}
+
+.topbar p {
+    color: #777;
+    margin-top: 6px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #6c3bbd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    background: #e9ddff;
+    color: #4b237a;
+    border-radius: 8px;
+}
+
+.issue-box,
+.table-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+}
+
+.issue-box h2,
+.table-header h2 {
+    color: #24113f;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #444;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #6c3bbd;
+}
+
+.issue-box button {
+    padding: 13px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #6c3bbd;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.issue-box button:hover {
+    background: #55299b;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+th {
+    background: #24113f;
+    color: white;
+    padding: 13px;
+    text-align: left;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background: #f8f5fc;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status.issued {
+    background: #fff1cc;
+    color: #9a6800;
+}
+
+.status.returned {
+    background: #dff5e5;
+    color: #218838;
+}
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

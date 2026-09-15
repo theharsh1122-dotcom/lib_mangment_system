@@ -1,0 +1,307 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f3fb;
+    color: #222;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: #241b4b;
+    color: white;
+    padding: 25px 18px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo h2 {
+    font-size: 25px;
+}
+
+.logo span {
+    font-size: 12px;
+    color: #c9c3df;
+}
+
+nav a {
+    display: block;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    color: #ddd8ee;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+    background: #5d45a5;
+    color: white;
+}
+
+nav .logout {
+    margin-top: 30px;
+    background: #3a2d67;
+}
+
+.main {
+    margin-left: 250px;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 30px;
+    color: #241b4b;
+}
+
+.topbar p {
+    margin-top: 6px;
+    color: #777;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info small {
+    display: block;
+    color: #777;
+    margin-top: 3px;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #5d45a5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.search-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.search-box form {
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-box input:focus {
+    border-color: #5d45a5;
+}
+
+.search-box button {
+    padding: 13px 22px;
+    border: none;
+    border-radius: 7px;
+    background: #5d45a5;
+    color: white;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #49358a;
+}
+
+.search-box a {
+    padding: 13px 18px;
+    background: #eee;
+    color: #333;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.books-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-header h2 {
+    color: #241b4b;
+    font-size: 21px;
+}
+
+.card-header p {
+    color: #777;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.book-count {
+    background: #eee9ff;
+    color: #5d45a5;
+    padding: 8px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f5f3fb;
+    color: #4b4560;
+    text-align: left;
+    padding: 14px;
+    font-size: 13px;
+}
+
+td {
+    padding: 15px 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: #faf9fd;
+}
+
+.category {
+    background: #eee9ff;
+    color: #5d45a5;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.available {
+    background: #e5f8ed;
+    color: #16834d;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.unavailable {
+    background: #ffe7e7;
+    color: #d33b3b;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.no-books {
+    text-align: center;
+    padding: 35px;
+    color: #777;
+}
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main {
+        margin-left: 210px;
+        padding: 20px;
+    }
+
+    .topbar h1 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .search-box form {
+        flex-wrap: wrap;
+    }
+
+    .search-box input {
+        width: 100%;
+        flex: none;
+    }
+
+    .search-box button,
+    .search-box a {
+        flex: 1;
+        text-align: center;
+    }
+
+    .books-card {
+        padding: 15px;
+    }
+
+    .card-header {
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
